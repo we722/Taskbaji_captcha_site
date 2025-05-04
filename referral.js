@@ -1,1 +1,1 @@
-// Placeholder content for referral.js
+// referral.js - Referral system logic

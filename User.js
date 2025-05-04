@@ -1,1 +1,1 @@
-// Placeholder content for User.js
+// User.js - Mongoose User schema

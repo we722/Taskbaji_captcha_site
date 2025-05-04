@@ -1,1 +1,1 @@
-// Placeholder content for auth.js
+// auth.js - Authentication logic

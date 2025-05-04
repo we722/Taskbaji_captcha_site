@@ -1,1 +1,1 @@
-// Placeholder content for IPLog.js
+// IPLog.js - Mongoose IP Log schema

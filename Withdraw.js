@@ -1,1 +1,1 @@
-// Placeholder content for Withdraw.js
+// Withdraw.js (frontend or backend based on placement)

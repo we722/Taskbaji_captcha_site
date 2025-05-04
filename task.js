@@ -1,1 +1,1 @@
-// task.js
+console.log('Task script loaded.');

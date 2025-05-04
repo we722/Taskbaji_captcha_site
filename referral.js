@@ -1,1 +1,1 @@
-// referral.js - Referral system logic
+console.log('Referral system logic.');

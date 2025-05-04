@@ -1,1 +1,1 @@
-// Withdraw.js (frontend or backend based on placement)
+console.log('Withdraw logic loaded.');

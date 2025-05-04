@@ -1,1 +1,1 @@
-// auth.js - Authentication logic
+console.log('Authentication logic.');

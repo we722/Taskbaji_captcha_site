@@ -1,1 +1,1 @@
-// User.js - Mongoose User schema
+console.log('User schema.');

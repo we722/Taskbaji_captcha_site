@@ -1,1 +1,1 @@
-// server.js - Express server setup
+console.log('Backend server started.');

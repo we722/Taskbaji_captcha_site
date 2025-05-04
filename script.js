@@ -1,1 +1,1 @@
-// script.js
+console.log('Main script loaded.');

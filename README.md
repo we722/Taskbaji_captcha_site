@@ -1,3 +1,2 @@
-# Taskbaji Fullstack Project
-
-Includes frontend and backend in one folder.
+# TaskBaji
+Earn by solving CAPTCHAs.

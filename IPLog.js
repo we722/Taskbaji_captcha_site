@@ -1,1 +1,1 @@
-// IPLog.js - Mongoose IP Log schema
+console.log('IP Logging.');

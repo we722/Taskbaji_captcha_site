@@ -1,1 +1,129 @@
-<!DOCTYPE html><html><head><title>TaskBaji</title></head><body><h1>Welcome to TaskBaji</h1></body></html>
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Taskbaji - লগইন ও রেজিস্ট্রেশন</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f1f1f1;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 100%;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    .toggle-btn {
+      background-color: #007bff;
+      margin-top: 10px;
+    }
+
+    .toggle-btn:hover {
+      background-color: #0056b3;
+    }
+
+    .error {
+      color: red;
+      font-size: 14px;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 id="form-title">রেজিস্ট্রেশন</h2>
+    <div id="error-msg" class="error"></div>
+    <input type="text" id="name" placeholder="নাম" />
+    <input type="email" id="email" placeholder="ইমেইল" />
+    <input type="password" id="password" placeholder="পাসওয়ার্ড" />
+    <div class="g-recaptcha" data-sitekey="6Ldtxy0rAAAAAK4VZKsb7bz974q4oGnR3RgXjG8n"></div>
+    <button onclick="submitForm()">রেজিস্টার করুন</button>
+    <button class="toggle-btn" onclick="toggleForm()">লগইন করতে চান?</button>
+  </div>
+
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <script>
+    let isLogin = false;
+
+    function toggleForm() {
+      isLogin = !isLogin;
+      document.getElementById('form-title').innerText = isLogin ? 'লগইন' : 'রেজিস্ট্রেশন';
+      document.querySelector('button').innerText = isLogin ? 'লগইন করুন' : 'রেজিস্টার করুন';
+      document.querySelector('.toggle-btn').innerText = isLogin ? 'রেজিস্ট্রেশন করতে চান?' : 'লগইন করতে চান?';
+      document.getElementById('name').style.display = isLogin ? 'none' : 'block';
+    }
+
+    async function submitForm() {
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const captcha = grecaptcha.getResponse();
+
+      if (!captcha) {
+        document.getElementById('error-msg').innerText = 'reCAPTCHA পূরণ করুন।';
+        return;
+      }
+
+      const endpoint = isLogin ? '/api/login' : '/api/register';
+      const payload = isLogin ? { email, password, captcha } : { name, email, password, captcha };
+
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        localStorage.setItem('token', data.token);
+        window.location.href = '/dashboard.html';
+      } else {
+        document.getElementById('error-msg').innerText = data.message;
+        grecaptcha.reset();
+      }
+    }
+  </script>
+</body>
+</html>
